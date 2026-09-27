@@ -20,9 +20,11 @@
  *     wired to it (Method/URL/auth exactly as configured here).
  *
  * Before running it:
- *   1. Replace YOUR-VM-HOST in both tool URLs with how n8n reaches the VM
- *      (its LAN address, a Tailscale/VPN hostname, or a public DNS name -
- *      whatever n8n can already reach; it does NOT need to be public).
+ *   1. Replace YOUR-VM-HOST in both tool URLs with the public hostname from
+ *      your Caddyfile (e.g. tracker.yourdomain.com). n8n runs as a container
+ *      in the same stack as Caddy, but it reaches this over the open
+ *      internet like any other client - no special network access needed,
+ *      since Caddy is already the public entry point for /deploy too.
  *   2. Create the "Order Tracker Deploy Token" credential (HTTP Bearer Auth)
  *      with the same value as DEPLOY_TOKEN in the VM's .env.
  *   3. Create the "Order Tracker MCP Access" credential (HTTP Bearer Auth)
