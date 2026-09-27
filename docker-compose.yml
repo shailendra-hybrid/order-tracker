@@ -1,0 +1,17 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      # whole project, so editing workflow.json / static / app.py / tg_group.py
+      # on the host takes effect immediately - no rebuild, no restart command.
+      - .:/app
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8080/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
